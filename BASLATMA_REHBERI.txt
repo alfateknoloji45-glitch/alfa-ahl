@@ -1,0 +1,131 @@
+╔══════════════════════════════════════════════════════════════════╗
+║                                                                  ║
+║           🪟 ALFAI ENTERPRISE - WINDOWS BAŞLATMA REHBERİ        ║
+║                                                                  ║
+╚══════════════════════════════════════════════════════════════════╝
+
+📥 ADIM 1: DOSYALARI YERLEŞTİRİN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+İndirdiğiniz dosyaları şu şekilde yerleştirin:
+
+    C:\alfai-enterprise\
+    │
+    ├── 📁 backend\             ← Backend klasörü buraya
+    ├── 📁 frontend\            ← Frontend klasörü buraya
+    ├── 📄 README.md
+    ├── 📄 start-windows.bat    ← ⭐ BU ÖNEMLİ!
+    └── diğer .md dosyaları
+
+
+🚀 ADIM 2: HIZLI BAŞLATMA (EN KOLAY)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. 📁 alfai-enterprise klasörünü açın
+2. 📄 start-windows.bat dosyasına ÇİFT TIKLAYIN
+3. Menüden seçin:
+   
+   ┌─────────────────────────────────┐
+   │  1) Backend                     │  ← Backend başlatır
+   │  2) Frontend                    │  ← Frontend başlatır  
+   │  3) Her ikisi de                │  ← 2 terminal gerekir
+   └─────────────────────────────────┘
+
+4. Tarayıcıda açın: http://localhost:5173
+5. Giriş: demo / demo
+
+
+🛠️ ADIM 3: MANUEL KURULUM (Alternatif)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BACKEND İÇİN:
+─────────────
+1. alfai-enterprise\backend klasörüne gidin
+2. Adres çubuğuna "cmd" yazın, Enter
+3. Şu komutları çalıştırın:
+
+   npm install
+   copy .env.example .env
+   npm start
+
+✅ Backend hazır: http://localhost:5002
+
+
+FRONTEND İÇİN:
+──────────────
+1. YENİ BİR CMD AÇIN (önemli!)
+2. alfai-enterprise\frontend klasörüne gidin
+3. Şu komutları çalıştırın:
+
+   npm install
+   copy .env.example .env
+   npm run dev
+
+✅ Frontend hazır: http://localhost:5173
+
+
+🎯 ADIM 4: UYGULAMAYI AÇIN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Chrome/Edge tarayıcısını açın
+2. http://localhost:5173 adresine gidin
+3. Giriş bilgileri:
+   ┌──────────────────────┐
+   │ Kullanıcı: demo      │
+   │ Şifre:     demo      │
+   └──────────────────────┘
+
+
+⚠️ SORUN GİDERME
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SORUN: "npm bulunamadı"
+ÇÖZÜM: Node.js yükleyin
+       → https://nodejs.org
+       → Bilgisayarı yeniden başlatın
+
+SORUN: "Port zaten kullanımda"
+ÇÖZÜM: Diğer uygulamayı kapatın veya farklı port kullanın
+
+SORUN: Sayfa açılmıyor
+ÇÖZÜM: 1. Backend çalışıyor mu kontrol edin
+       2. Frontend çalışıyor mu kontrol edin
+       3. Browser console'da hata var mı bakın (F12)
+
+
+📞 YARDIM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• WINDOWS_SETUP.md dosyasını okuyun (DETAYLI)
+• README.md - Genel bilgiler
+• SETUP.md - Kurulum rehberi
+• CHECKLIST.md - Kontrol listesi
+
+
+✅ BAŞARI KONTROLÜ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Backend terminalinde görmeli:
+    "ALFAI Odoo Backend listening on 5002"
+
+Frontend terminalinde görmeli:
+    "Local: http://localhost:5173/"
+
+Tarayıcıda görmeli:
+    ALFAI Enterprise ERP login sayfası
+
+
+🎉 TEBRİKLER!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Sisteminiz çalışıyor! 
+
+Sonraki adımlar:
+✓ Dashboard'u keşfedin
+✓ Finans modülünü deneyin
+✓ AI asistanla sohbet edin
+✓ Raporları oluşturun
+
+Keyifli kullanımlar! 🚀
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

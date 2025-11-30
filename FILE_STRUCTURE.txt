@@ -1,0 +1,97 @@
+ALFAI Enterprise ERP - Dosya Yapısı
+=====================================
+
+📁 ROOT
+│
+├── 📄 README.md                    # Ana dokümantasyon
+├── 📄 SETUP.md                     # Detaylı kurulum rehberi
+├── 📄 PROJECT_SUMMARY.md          # Proje özet raporu
+├── 📄 QUICK_START.md              # Hızlı başlangıç
+├── 📄 start-alfai.sh              # Master başlatma script'i
+├── 📄 docker-compose.yml          # Docker orchestration
+│
+├── 📁 backend/                     # Backend API
+│   ├── 📄 package.json
+│   ├── 📄 server.js               # Ana server
+│   ├── 📄 Dockerfile
+│   ├── 📄 start.sh                # Backend başlatıcı
+│   ├── 📄 .env.example
+│   ├── 📄 local_store.json
+│   │
+│   ├── 📁 ai/
+│   │   └── 📄 assistant.js        # AI asistan
+│   │
+│   └── 📁 services/
+│       └── 📄 odoo.js             # Odoo entegrasyonu
+│
+└── 📁 frontend/                    # Frontend React App
+    ├── 📄 package.json
+    ├── 📄 vite.config.mjs
+    ├── 📄 index.html
+    ├── 📄 Dockerfile
+    ├── 📄 nginx.conf
+    ├── 📄 start.sh                # Frontend başlatıcı
+    ├── 📄 .env.example
+    │
+    ├── 📁 src/
+    │   ├── 📄 main.jsx
+    │   ├── 📄 App.jsx             # Ana uygulama
+    │   │
+    │   ├── 📁 api/
+    │   │   └── 📄 odooApi.js
+    │   │
+    │   ├── 📁 components/
+    │   │
+    │   └── 📁 modules/             # 32+ modül
+    │       ├── 📄 Dashboard.jsx
+    │       ├── 📄 Finance.jsx
+    │       ├── 📄 Inventory.jsx
+    │       ├── 📄 Customers.jsx
+    │       ├── 📄 Sales.jsx
+    │       ├── 📄 Purchase.jsx
+    │       ├── 📄 HR.jsx
+    │       ├── 📄 Manufacturing.jsx
+    │       ├── 📄 Projects.jsx
+    │       ├── 📄 Maintenance.jsx
+    │       ├── 📄 Helpdesk.jsx
+    │       ├── 📄 CRM.jsx
+    │       ├── 📄 Logistics.jsx
+    │       ├── 📄 AI.jsx
+    │       ├── 📄 ChatAI.jsx
+    │       ├── 📄 Analytics.jsx
+    │       ├── 📄 Reports.jsx
+    │       ├── 📄 QuoteBuilder.jsx
+    │       ├── 📄 QuoteList.jsx
+    │       ├── 📄 SubscriptionManagement.jsx
+    │       ├── 📄 InvoiceSystem.jsx
+    │       └── ... (20+ daha)
+    │
+    └── 📁 external_features/       # 34 ek modül
+        ├── 📄 AdminPanel.jsx
+        ├── 📄 CompanySetup.jsx
+        ├── 📄 NotificationCenter.jsx
+        ├── 📄 ErrorBoundary.jsx
+        ├── 📄 ErrorTracking.jsx
+        ├── 📄 HelpCenter.jsx
+        ├── 📄 OnboardingWizard.jsx
+        ├── 📄 SecurityHardening.jsx
+        ├── 📄 PerformanceProfiler.jsx
+        ├── 📄 DashboardPro.jsx
+        └── ... (25+ daha)
+
+─────────────────────────────────────────────────────────
+
+📊 İstatistikler:
+- Toplam Modül: 66+
+- Dosya Sayısı: 100+
+- Kod Satırı: 50,000+
+- API Endpoint: 40+
+
+🎯 Özellikler:
+✅ Tam ERP sistemi
+✅ AI entegrasyonu
+✅ Multi-tenant
+✅ Docker ready
+✅ Production ready
+
+─────────────────────────────────────────────────────────
