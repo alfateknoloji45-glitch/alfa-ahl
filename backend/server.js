@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 const path = require('path');
 
 // Import routes
@@ -21,6 +22,28 @@ const aiRoutes = require('./routes/ai');
 const app = express();
 const PORT = process.env.PORT || 5002;
 
+// Rate limiting configuration
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: {
+    success: false,
+    error: 'Çok fazla istek gönderdiniz. Lütfen 15 dakika sonra tekrar deneyin.'
+  },
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
+// Stricter rate limit for auth routes
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10, // 10 login attempts per 15 minutes
+  message: {
+    success: false,
+    error: 'Çok fazla giriş denemesi. Lütfen 15 dakika sonra tekrar deneyin.'
+  }
+});
+
 // Middleware
 app.use(cors({
   origin: ['http://localhost:5173', 'http://localhost:3000'],
@@ -28,6 +51,9 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Apply rate limiting to API routes
+app.use('/api', limiter);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -39,8 +65,8 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// API Routes
-app.use('/api/auth', authRoutes);
+// API Routes - Apply stricter rate limit to auth routes
+app.use('/api/auth', authLimiter, authRoutes);
 app.use('/api/saas', saasRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);
 app.use('/api/modules', modulesRoutes);
