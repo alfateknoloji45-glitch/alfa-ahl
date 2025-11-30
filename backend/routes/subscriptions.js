@@ -2,7 +2,7 @@ const express = require('express');
 const { v4: uuidv4 } = require('uuid');
 const router = express.Router();
 
-const { store, SUBSCRIPTION_PLANS, AVAILABLE_MODULES } = require('../models/store');
+const { store, SUBSCRIPTION_PLANS, AVAILABLE_MODULES, YEARLY_DISCOUNT_MULTIPLIER } = require('../models/store');
 const { authenticate, adminOnly } = require('../middleware/auth');
 
 /**
@@ -174,7 +174,7 @@ router.post('/add-module', authenticate, adminOnly, (req, res) => {
   company.extraModules.push(moduleId);
 
   const monthlyPrice = module.price;
-  const yearlyPrice = Math.round(monthlyPrice * 12 * 0.8);
+  const yearlyPrice = Math.round(monthlyPrice * 12 * YEARLY_DISCOUNT_MULTIPLIER);
 
   // Create module subscription
   store.moduleSubscriptions.push({

@@ -176,7 +176,7 @@ const Dashboard = () => {
               <strong>{data?.subscription?.activeModules || 0} modül</strong>
             </div>
             {data?.trialInfo && (
-              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.75rem 0', background: '#fef3c7', margin: '0.75rem -1.5rem -1.5rem', padding: '1rem 1.5rem', borderRadius: '0 0 12px 12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', background: '#fef3c7', margin: '0.75rem -1.5rem -1.5rem', padding: '1rem 1.5rem', borderRadius: '0 0 12px 12px' }}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <Clock size={16} />
                   Kalan Süre

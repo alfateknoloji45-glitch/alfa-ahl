@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { AVAILABLE_MODULES } = require('../models/store');
+const { AVAILABLE_MODULES, YEARLY_DISCOUNT_MULTIPLIER } = require('../models/store');
 const { authenticate, checkModuleAccess } = require('../middleware/auth');
 
 /**
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     data: Object.entries(AVAILABLE_MODULES).map(([key, module]) => ({
       id: key,
       ...module,
-      yearlyPrice: Math.round(module.price * 12 * 0.8)
+      yearlyPrice: Math.round(module.price * 12 * YEARLY_DISCOUNT_MULTIPLIER)
     }))
   });
 });
@@ -49,7 +49,7 @@ router.get('/accessible', authenticate, (req, res) => {
     .map(([key, module]) => ({
       id: key,
       ...module,
-      yearlyPrice: Math.round(module.price * 12 * 0.8)
+      yearlyPrice: Math.round(module.price * 12 * YEARLY_DISCOUNT_MULTIPLIER)
     }));
 
   res.json({

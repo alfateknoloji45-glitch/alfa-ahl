@@ -2,7 +2,7 @@ const express = require('express');
 const { v4: uuidv4 } = require('uuid');
 const router = express.Router();
 
-const { store, SUBSCRIPTION_PLANS, AVAILABLE_MODULES } = require('../models/store');
+const { store, SUBSCRIPTION_PLANS, AVAILABLE_MODULES, YEARLY_DISCOUNT_MULTIPLIER } = require('../models/store');
 const { authenticate, adminOnly } = require('../middleware/auth');
 
 /**
@@ -39,7 +39,7 @@ router.get('/modules', (req, res) => {
     data: Object.entries(AVAILABLE_MODULES).map(([key, module]) => ({
       id: key,
       ...module,
-      yearlyPrice: Math.round(module.price * 12 * 0.8) // 20% discount for yearly
+      yearlyPrice: Math.round(module.price * 12 * YEARLY_DISCOUNT_MULTIPLIER) // 20% discount for yearly
     }))
   });
 });
@@ -70,13 +70,23 @@ router.post('/companies', authenticate, adminOnly, async (req, res) => {
       });
     }
 
-    const subdomainToUse = subdomain || name.toLowerCase().replace(/[^a-z0-9]/g, '');
+    // Validate and generate subdomain
+    let subdomainToUse = subdomain || name.toLowerCase().replace(/[^a-z0-9]/g, '');
     
-    if (store.companies.find(c => c.subdomain === subdomainToUse)) {
-      return res.status(400).json({
-        success: false,
-        error: 'Bu subdomain kullanılıyor'
-      });
+    // Ensure subdomain is between 3-63 characters (DNS requirement)
+    if (subdomainToUse.length < 3) {
+      subdomainToUse = subdomainToUse + '-company';
+    }
+    if (subdomainToUse.length > 63) {
+      subdomainToUse = subdomainToUse.substring(0, 63);
+    }
+    
+    // Handle uniqueness by adding suffix if needed
+    let finalSubdomain = subdomainToUse;
+    let suffix = 1;
+    while (store.companies.find(c => c.subdomain === finalSubdomain)) {
+      finalSubdomain = `${subdomainToUse.substring(0, 58)}-${suffix}`;
+      suffix++;
     }
 
     const selectedPlan = SUBSCRIPTION_PLANS[plan] || SUBSCRIPTION_PLANS.starter;
@@ -84,11 +94,11 @@ router.post('/companies', authenticate, adminOnly, async (req, res) => {
     const newCompany = {
       id: uuidv4(),
       name,
-      subdomain: subdomainToUse,
+      subdomain: finalSubdomain,
       plan,
       status: 'trial',
       trialEndsAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-      activeModules: Object.keys(AVAILABLE_MODULES), // All modules for trial
+      activeModules: Object.keys(AVAILABLE_MODULES), // All modules for trial - users will need to select a plan when trial ends
       extraModules: [],
       billingCycle: 'monthly',
       createdAt: new Date().toISOString()
@@ -202,7 +212,7 @@ router.post('/companies/:id/modules', authenticate, adminOnly, (req, res) => {
 
   // Calculate price
   const monthlyPrice = module.price;
-  const yearlyPrice = Math.round(monthlyPrice * 12 * 0.8); // 20% discount
+  const yearlyPrice = Math.round(monthlyPrice * 12 * YEARLY_DISCOUNT_MULTIPLIER); // 20% discount
 
   // Create module subscription record
   store.moduleSubscriptions.push({

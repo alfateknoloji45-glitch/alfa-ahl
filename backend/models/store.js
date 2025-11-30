@@ -5,6 +5,10 @@
 
 const { v4: uuidv4 } = require('uuid');
 
+// Billing constants
+const YEARLY_DISCOUNT_MULTIPLIER = 0.8; // 20% discount for yearly billing
+const TRIAL_DURATION_DAYS = 30;
+
 // Available modules with pricing
 const AVAILABLE_MODULES = {
   dashboard: { name: 'Dashboard', price: 0, included: true, description: 'Ana gösterge paneli' },
@@ -123,6 +127,8 @@ const store = {
 module.exports = {
   AVAILABLE_MODULES,
   SUBSCRIPTION_PLANS,
+  YEARLY_DISCOUNT_MULTIPLIER,
+  TRIAL_DURATION_DAYS,
   createDemoCompany,
   store
 };
